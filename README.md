@@ -25,8 +25,8 @@ Remote repositories will automatically use the hostname. Make sure SSH is config
 ## Run it
 
 
-To run it, use the backup-manager command which comes from the resticmgr python module.
+To run it, use the restic-manager command which comes from the resticmgr python module.
 
-    backup-manager backup
+    restic-manager backup
 
 

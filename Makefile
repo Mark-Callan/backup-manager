@@ -1,9 +1,14 @@
 
+ifndef INSTALL_PATH
+INSTALL_PATH="/data/backups"
+endif
+
+
 .PHONY: restic scripts config python manager venv install clean
 
 install: restic scripts config manager
 
-scripts: /usr/bin/restictl /usr/bin/restic-init /usr/bin/restic-backup /usr/bin/restic-manager
+scripts: /usr/bin/restictl /usr/bin/restic-init /usr/bin/restic-backup /usr/bin/restic-manager /usr/bin/restic-reponame
 
 config: /data/backups /data/backups/.restic-backups /data/backups/.restic-environment /data/backups/.restic-password /data/backups/.restic-repositories
 
@@ -39,6 +44,10 @@ python:
 	cp files/usr/bin/restic-backup /usr/bin/restic-backup
 	chmod +x /usr/bin/restic-backup
 
+/usr/bin/restic-reponame:
+	cp files/usr/bin/restic-reponame /usr/bin/restic-reponame
+	chmod +x /usr/bin/restic-reponame
+
 /data/backups:
 	mkdir -p /data/backups
 	chown -R root:restic /data/backups
@@ -69,7 +78,7 @@ clean-config:
 	rm -f /data/backups/.restic-backups /data/backups/.restic-environment /data/backups/.restic-password /data/backups/.restic-repositories
 
 clean-scripts:
-	rm -f /usr/bin/restictl /usr/bin/restic-init /usr/bin/restic-backup /usr/bin/restic-manager
+	rm -f /usr/bin/restictl /usr/bin/restic-init /usr/bin/restic-backup /usr/bin/restic-manager /usr/bin/restic-reponame
 
 clean-cache:
 	rm -rf /data/backups/.cache

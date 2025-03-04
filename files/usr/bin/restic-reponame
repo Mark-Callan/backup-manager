@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+repo_name=${1:?"First positional argument, repo name, is required."}
+
+sftp_repo="`echo ${repo_name} | grep -e '^sftp'`"
+
+REPOS_PATH=`sudo cat /data/backups/.restic-repositories`
+
+if [[ "${sftp_repo}" == "" ]]; then
+	repo_path="${REPOS_PATH}/${repo_name}"
+elif [[ "${sftp_repo}" != ""  ]]; then
+	repo_path="${sftp_repo}:${REPOS_PATH}/`hostname`"
+fi
+echo ${repo_path}
+

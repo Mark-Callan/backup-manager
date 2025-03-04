@@ -3,24 +3,15 @@
 repo_name=${1:?"First positional argument, repo name, is required."}
 source_path=${2:?"Second positional argument, source path, is required."}
 
-sftp_repo="`echo ${repo_name} | grep -e '^sftp'`"
 
-if [[ "${sftp_repo}" == "" ]] && [[ ! -d ${source_path} ]]; then
+if [[ ! -d ${source_path} ]]; then
 	echo "[ERROR] Source path does not exist"
 	exit 1
 fi
 
+reponame=`restic-reponame ${repo_name}`
+
 REPOS_PATH=`sudo -u restic cat /data/backups/.restic-repositories`
 
-if [[ ! -d "${REPOS_PATH}/${repo_name}" ]]; then
-	echo "[ERROR] Repository ${REPOS_PATH}/${repo_name} does not exist. Initialize the repository with restic-init first."
-fi
-
-if [[ "${sftp_repo}" == "" ]]; then
-	repo_path="${REPOS_PATH}/${repo_name}"
-elif [[ "${sftp_repo}" != ""  ]]; then
-	repo_path="${sftp_repo}:${REPOS_PATH}/`echo ${sftp_repo} | cut -d'@' -f2`"
-fi
-
-restictl --repo "${repo_path}" --verbose backup ${source_path} ;
+restictl --repo "${reponame}" --verbose backup ${source_path} ;
 
