@@ -25,6 +25,7 @@ def parse_backup_config(entry_string):
 
 def load_backup_config():
     backups_config = env["RESTIC_BACKUPS"]
+    _info(f"RESTIC_BACKUPS: {backups_config}")
     if not exists(backups_config):
         _die(f"Backup config file not found: {backups_config}")
     with open(backups_config, 'r') as fd:
@@ -52,7 +53,10 @@ def backup():
     backup_config = env["RESTIC_BACKUPS"]
     _info(f"reading backup config from: {backup_config}")
     for entry in load_backup_config():
-        do_backup(entry)
+        try:
+            do_backup(entry)
+        except Exception as err:
+            print(f"[WARN] Backup failed: {backup_config}\n{err}")
 
 def list_backup_configs():
     _info("Configured backups")
