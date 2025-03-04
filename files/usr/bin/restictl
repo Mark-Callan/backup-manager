@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+RESTIC_UID=0
+ENVIRONMENT=/data/backups/.restic-environment
+
+
+if [[ $EUID -ne ${RESTIC_UID} ]]; then
+    echo "running script as restic user ${RESTIC_UID} - " "$0" "$@"
+    sudo -u `sudo getent passwd ${RESTIC_UID} | cut -d':' -f1` -E "$0" "$@"
+    exit
+fi
+
+set -euf -o pipefail
+
+source ${ENVIRONMENT}
+
+PWD=`pwd`
+mkdir -p ${RESTIC_REPOSITORIES} ${RESTIC_CACHE}
+( cd ${RESTIC_REPOSITORIES} && echo -n "WD: " && pwd && restic --cache-dir ${RESTIC_CACHE} $@ )
+

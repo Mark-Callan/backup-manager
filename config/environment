@@ -1,0 +1,4 @@
+export RESTIC_PASSWORD_FILE=/data/backups/.restic-password
+export RESTIC_REPOSITORIES=`cat /data/backups/.restic-repositories`
+export RESTIC_CACHE=/data/backups/.cache
+export RESTIC_BACKUPS=/data/backups/.restic-backups

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+repo_name=${1:?"First positional argument, repo name, is required."}
+
+REPOS_PATH=`sudo -u restic cat /data/backups/.restic-repositories`
+
+restictl init --repo "${REPOS_PATH}/${repo_name}" ;
+
