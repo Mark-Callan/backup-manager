@@ -11,7 +11,5 @@ fi
 
 reponame=`restic-reponame ${repo_name}`
 
-REPOS_PATH=`sudo cat /data/backups/.restic-repositories`
-
 restictl --repo "${reponame}" --verbose backup ${source_path} ;
 
