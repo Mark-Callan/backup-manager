@@ -36,7 +36,7 @@ def maybe_init(cfg):
     _info(f"Initializing repo: {repo_name}")
     try:
         sh["restic-init"][repo_name]()
-    except Error as e:
+    except Exception as e:
         _info("Failed to init repo. Hopefully it already exists.")
 
 
