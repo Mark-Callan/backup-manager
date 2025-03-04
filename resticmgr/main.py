@@ -33,9 +33,11 @@ def load_backup_config():
 def maybe_init(cfg):
     repositories = env['RESTIC_REPOSITORIES']
     repo_name = cfg['name']
-    if not exists(f"{repositories}/{repo_name}"):
-        _info(f"Initializing repo: {repo_name}")
-        sh["restic-init"][repo_name] & FG
+    _info(f"Initializing repo: {repo_name}")
+    try:
+        sh["restic-init"][repo_name]()
+    except Error as e:
+        _info("Failed to init repo. Hopefully it already exists.")
 
 
 def do_backup(cfg):
@@ -78,6 +80,9 @@ def main():
         backup()
     elif action == "list":
         list_repo_objects()
+    elif action == "init":
+        for cfg in load_backup_config():
+            maybe_init(cfg)
 
 
 
