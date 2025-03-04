@@ -13,7 +13,7 @@ scripts: /usr/bin/restictl /usr/bin/restic-init /usr/bin/restic-backup /usr/bin/
 config: /data/backups /data/backups/.restic-backups /data/backups/.restic-environment /data/backups/.restic-password /data/backups/.restic-repositories
 
 restic:
-	sudo apt install -y restic
+	sudo apt install -y restic python3 python3-pip virtualenv
 
 manager: venv /usr/bin/restic-manager
 
