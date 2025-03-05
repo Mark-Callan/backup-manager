@@ -1,0 +1,11 @@
+[Unit]
+Description="System backups with restic using backup-manager's restic-manager command."
+
+[Service]
+Type=simple
+ExecStart=
+ExecStart=/usr/bin/restic-manager backup
+
+[Install]
+WantedBy="multi-user.target"
+
