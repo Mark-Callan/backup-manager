@@ -1,0 +1,6 @@
+sftp:root@nas-02 /home/mark/Pictures
+sftp:root@nas-02 /data/ssd/shgs31_1t
+sftp:root@nas-02 /home/mark/Downloads
+sftp:root@nas-02 /home/mark/Documents
+sftp:root@nas-02 /home/mark/Music
+sftp:root@nas-02 /home/mark/source
