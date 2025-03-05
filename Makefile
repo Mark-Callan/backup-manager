@@ -64,7 +64,7 @@ python:
 	chown -R root:restic /data/backups
 
 /data/backups/.restic-backups:
-	cp config/backups /data/backups/.restic-backups
+	cp config/backups.$(shell hostname) /data/backups/.restic-backups
 	chown root:restic /data/backups/.restic-backups
 
 /data/backups/.restic-environment:
