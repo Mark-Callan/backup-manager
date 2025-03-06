@@ -19,10 +19,10 @@ services: /usr/lib/systemd/system/restic-manager.service /usr/lib/systemd/system
 
 
 /usr/lib/systemd/system/restic-manager.service:
-	cp files/usr/lib/systemd/system/restic-manager.service /usr/lib/systemd/system/restic-manager.service
+	cp manager/usr/lib/systemd/system/restic-manager.service /usr/lib/systemd/system/restic-manager.service
 
 /usr/lib/systemd/system/restic-manager.timer:
-	cp files/usr/lib/systemd/system/restic-manager.timer /usr/lib/systemd/system/restic-manager.timer
+	cp manager/usr/lib/systemd/system/restic-manager.timer /usr/lib/systemd/system/restic-manager.timer
 
 restic:
 	sudo apt install -y restic python3 python3-pip virtualenv
@@ -30,7 +30,7 @@ restic:
 manager: venv /usr/bin/restic-manager
 
 /usr/bin/restic-manager:
-	cp files/usr/bin/restic-manager /usr/bin/restic-manager
+	cp manager/usr/bin/restic-manager /usr/bin/restic-manager
 	chmod +x /usr/bin/restic-manager
 
 venv: python
@@ -46,27 +46,27 @@ python:
 
 backrest:
 	mkdir -p /opt/restic-backrest/bin/ ;
-	cp files/opt/restic-backrest/bin/start.sh /opt/restic-backrest/bin/ ;
-	cp files/opt/restic-backrest/bin/stop.sh /opt/restic-backrest/bin/ ;
-	cp files/usr/lib/systemd/system/restic-backrest.service /usr/lib/systemd/system/restic-backrest.service ;
+	cp manager/opt/restic-backrest/bin/start.sh /opt/restic-backrest/bin/ ;
+	cp manager/opt/restic-backrest/bin/stop.sh /opt/restic-backrest/bin/ ;
+	cp manager/usr/lib/systemd/system/restic-backrest.service /usr/lib/systemd/system/restic-backrest.service ;
 	systemctl daemon-reload ;
 	systemd-analyze verify /usr/lib/systemd/system/restic-backrest.service && sudo systemctl enable restic-backrest && sudo systemctl start restic-backrest ;
 
 
 /usr/bin/restictl:
-	cp files/usr/bin/restictl /usr/bin/restictl
+	cp manager/usr/bin/restictl /usr/bin/restictl
 	chmod +x /usr/bin/restictl
 
 /usr/bin/restic-init:
-	cp files/usr/bin/restic-init /usr/bin/restic-init
+	cp manager/usr/bin/restic-init /usr/bin/restic-init
 	chmod +x /usr/bin/restic-init
 
 /usr/bin/restic-backup:
-	cp files/usr/bin/restic-backup /usr/bin/restic-backup
+	cp manager/usr/bin/restic-backup /usr/bin/restic-backup
 	chmod +x /usr/bin/restic-backup
 
 /usr/bin/restic-reponame:
-	cp files/usr/bin/restic-reponame /usr/bin/restic-reponame
+	cp manager/usr/bin/restic-reponame /usr/bin/restic-reponame
 	chmod +x /usr/bin/restic-reponame
 
 /data/backups:
