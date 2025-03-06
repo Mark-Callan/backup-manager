@@ -1,0 +1,18 @@
+[Unit]
+Description=Restic Backrest Web GUI - backrest.srvr.farm
+After=local-fs.target network.target docker.service zfs.target
+Requires=network.target docker.service zfs.target
+Wants=local-fs.target
+
+[Service]
+Restart=always
+RestartSec=10
+Type=simple
+TimeoutStopSec=120s
+User=root
+ExecStart=/opt/restic-backrest/bin/start.sh
+ExecStop=/opt/restic-backrest/bin/stop.sh
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target

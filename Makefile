@@ -44,6 +44,15 @@ python:
 	cp install.sh /data/backups/py/install.sh;
 	chmod +x /data/backups/py/install.sh ;
 
+backrest:
+	mkdir -p /opt/restic-backrest/bin/ ;
+	cp files/opt/restic-backrest/bin/start.sh /opt/restic-backrest/bin/ ;
+	cp files/opt/restic-backrest/bin/stop.sh /opt/restic-backrest/bin/ ;
+	cp files/usr/lib/systemd/system/restic-backrest.service /usr/lib/systemd/system/restic-backrest.service ;
+	systemctl daemon-reload ;
+	systemd-analyze verify /usr/lib/systemd/system/restic-backrest.service && sudo systemctl enable restic-backrest && sudo systemctl start restic-backrest ;
+
+
 /usr/bin/restictl:
 	cp files/usr/bin/restictl /usr/bin/restictl
 	chmod +x /usr/bin/restictl
