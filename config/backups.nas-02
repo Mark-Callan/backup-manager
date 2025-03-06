@@ -2,3 +2,10 @@ minecraft 	/srv/minecraft-60
 minecraft 	/srv/minecraft-61
 minecraft 	/srv/minecraft-62
 minecraft 	/srv/minecraft-63
+nas-02		/data/files
+nas-02		/srv/omada
+nas-02		/srv/registry
+nas-02		/data/registry
+nas-02		/srv/resume
+nas-02		/srv/reverse-proxy
+nas-02		/srv/jenkins
