@@ -93,7 +93,7 @@ def main():
         if len(errors) > 0:
             for e in errors:
                 print(e)
-        _die(f"backup failures reported: {len(errors)}")
+            _die(f"backup failures reported: {len(errors)}")
         sys.exit(len(errors))
     elif action == "list":
         list_repo_objects()
