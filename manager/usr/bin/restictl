@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euf -o pipefail
+
 RESTIC_UID=0
 ENVIRONMENT=/data/backups/.restic-environment
 
@@ -10,11 +12,11 @@ if [[ $EUID -ne ${RESTIC_UID} ]]; then
     exit
 fi
 
-set -euf -o pipefail
-
 source ${ENVIRONMENT}
 
 PWD=`pwd`
 mkdir -p ${RESTIC_REPOSITORIES} ${RESTIC_CACHE}
-( cd ${RESTIC_REPOSITORIES} && echo -n "WD: " && pwd && restic --cache-dir ${RESTIC_CACHE} $@ )
+#( cd ${RESTIC_REPOSITORIES} && echo -n "WD: " && pwd && restic --cache-dir ${RESTIC_CACHE} $@ )
+args="$*"
+restic --cache-dir ${RESTIC_CACHE} ${args}
 

@@ -15,7 +15,7 @@ config: /data/backups /data/backups/.restic-backups /data/backups/.restic-enviro
 services: /usr/lib/systemd/system/restic-manager.service /usr/lib/systemd/system/restic-manager.timer
 	systemctl daemon-reload ;
 	systemd-analyze verify /usr/lib/systemd/system/restic-manager.service ;
-	systemd-analyze verify /usr/lib/systemd/system/restic-manager.timer && systemctl enable restic-manager.timer && systemctl start restic-manager.timer;
+	systemd-analyze verify /usr/lib/systemd/system/restic-manager.timer && systemctl enable restic-manager.timer ; sudo systemctl restart restic-manager.timer ;
 
 
 /usr/lib/systemd/system/restic-manager.service:

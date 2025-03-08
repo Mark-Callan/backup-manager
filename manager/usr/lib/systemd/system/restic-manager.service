@@ -2,7 +2,9 @@
 Description="System backups with restic using backup-manager's restic-manager command."
 
 [Service]
-Type=simple
+Type=oneshot
+Restart=on-failure
+RestartSec=600
 ExecStart=
 ExecStart=/usr/bin/restic-manager backup
 

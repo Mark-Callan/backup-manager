@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euf -o pipefail
+
 repo_name=${1:?"First positional argument, repo name, is required."}
 source_path=${2:?"Second positional argument, source path, is required."}
 

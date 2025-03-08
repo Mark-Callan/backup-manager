@@ -16,6 +16,9 @@ def _die(msg):
 def _info(msg):
     print(f"[INFO]  {msg}")
 
+def _warn(msg):
+    print(f"[WARN] {msg}")
+
 def parse_backup_config(entry_string):
     parts = entry_string.split()
     entry = {}
@@ -39,6 +42,7 @@ def maybe_init(cfg):
         sh["restic-init"][repo_name]()
     except Exception as e:
         _info("Failed to init repo. Hopefully it already exists.")
+        return e
 
 
 def do_backup(cfg):
@@ -52,11 +56,14 @@ def backup():
     _info("creating backups.")
     backup_config = env["RESTIC_BACKUPS"]
     _info(f"reading backup config from: {backup_config}")
+    errors=[]
     for entry in load_backup_config():
         try:
             do_backup(entry)
         except Exception as err:
-            print(f"[WARN] Backup failed: {backup_config}\n{err}")
+            _warn(f"[WARN] Backup failed: {backup_config}\n{err}")
+            errors.append(err)
+    return errors
 
 def list_backup_configs():
     _info("Configured backups")
@@ -78,15 +85,21 @@ def main():
     if len(args) > 1:
         action = args[1]
 
+    errors=[]
     if action == "config":
         list_backup_configs()
     elif action == "backup":
-        backup()
+        errors = backup()
+        if len(errors) > 0:
+            for e in errors:
+                print(e)
+        _die(f"backup failures reported: {len(errors)}")
+        sys.exit(len(errors))
     elif action == "list":
         list_repo_objects()
     elif action == "init":
         for cfg in load_backup_config():
             maybe_init(cfg)
 
-
+    
 

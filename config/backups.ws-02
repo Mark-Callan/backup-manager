@@ -1,0 +1,9 @@
+sftp:root@nas-02 /mnt/d
+sftp:root@nas-02 /mnt/c/Users/calla/Desktop
+sftp:root@nas-02 /mnt/c/Users/calla/Documents
+sftp:root@nas-02 /mnt/c/Users/calla/Downloads
+sftp:root@nas-02 /mnt/c/Users/calla/Music
+sftp:root@nas-02 /mnt/c/Users/calla/OneDrive
+sftp:root@nas-02 /mnt/c/Users/calla/Pictures
+sftp:root@nas-02 /mnt/c/Users/calla/Projects
+sftp:root@nas-02 /mnt/c/Users/calla/Videos
