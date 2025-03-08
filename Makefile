@@ -46,11 +46,11 @@ python:
 
 backrest:
 	mkdir -p /opt/restic-backrest/bin/ ;
-	cp manager/opt/restic-backrest/bin/start.sh /opt/restic-backrest/bin/ ;
-	cp manager/opt/restic-backrest/bin/stop.sh /opt/restic-backrest/bin/ ;
-	cp manager/usr/lib/systemd/system/restic-backrest.service /usr/lib/systemd/system/restic-backrest.service ;
+	cp service/opt/restic-backrest/bin/start.sh /opt/restic-backrest/bin/ ;
+	cp service/opt/restic-backrest/bin/stop.sh /opt/restic-backrest/bin/ ;
+	cp service/usr/lib/systemd/system/restic-backrest.service /usr/lib/systemd/system/restic-backrest.service ;
 	systemctl daemon-reload ;
-	systemd-analyze verify /usr/lib/systemd/system/restic-backrest.service && sudo systemctl enable restic-backrest && sudo systemctl start restic-backrest ;
+	systemd-analyze verify /usr/lib/systemd/system/restic-backrest.service && sudo systemctl enable restic-backrest && sudo systemctl restart restic-backrest ;
 
 
 /usr/bin/restictl:
