@@ -18,5 +18,6 @@ PWD=`pwd`
 mkdir -p ${RESTIC_REPOSITORIES} ${RESTIC_CACHE}
 #( cd ${RESTIC_REPOSITORIES} && echo -n "WD: " && pwd && restic --cache-dir ${RESTIC_CACHE} $@ )
 args="$*"
+echo " restic [args=${args}]"
 restic --cache-dir ${RESTIC_CACHE} ${args}
 

@@ -19,5 +19,6 @@ source ${ENVIRONMENT}
 PWD=`pwd`
 mkdir -p ${RESTIC_REPOSITORIES} ${RESTIC_CACHE}
 source /data/backups/venv/bin/activate
-resticmgr $@
+args="$*"
+resticmgr ${args} ;
 

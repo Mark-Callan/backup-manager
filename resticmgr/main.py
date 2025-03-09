@@ -49,7 +49,7 @@ def do_backup(cfg):
     maybe_init(cfg)
     name = cfg['name']
     source = cfg['source']
-    _info(f'Backing up "{source}" to repo {name}')
+    #_info(f'Backing up "{source}" to repo {name}')
     sh["restic-backup"][name][source] & FG
 
 def backup():
@@ -58,11 +58,13 @@ def backup():
     _info(f"reading backup config from: {backup_config}")
     errors=[]
     for entry in load_backup_config():
+        _info(f"Backing up: {entry}")
         try:
             do_backup(entry)
         except Exception as err:
             _warn(f"[WARN] Backup failed: {backup_config}\n{err}")
             errors.append(err)
+
     return errors
 
 def list_backup_configs():
@@ -90,6 +92,7 @@ def main():
         list_backup_configs()
     elif action == "backup":
         errors = backup()
+        _info("=== Backups completed ===")
         if len(errors) > 0:
             for e in errors:
                 print(e)
